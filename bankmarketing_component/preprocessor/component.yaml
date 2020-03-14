@@ -1,0 +1,21 @@
+name: My Preprocess task
+description: My first work
+inputs:
+    - {name: filename}
+    - {name: accesskey}
+    - {name: accesskeysecret}
+    - {name: endpoint}
+    - {name: bucketname}
+    - {name: output}
+implementation:
+    container:
+        image: registry-intl.ap-northeast-1.aliyuncs.com/mykfp/preprocessor-bm:0.0.3
+        command: [
+            python3, /ml/process.py,
+            --filename, {inputValue: filename},
+            --accesskey, {inputValue: accesskey},
+            --accesskeysecret, {inputValue: accesskeysecret},
+            --endpoint, {inputValue: endpoint},
+            --bucketname, {inputValue: bucketname},
+            --output, {inputValue: output}
+    ]
